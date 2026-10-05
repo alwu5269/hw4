@@ -1,0 +1,5 @@
+openai
+pydantic>=2
+pydantic-ai-slim[openai]
+fastapi
+uvicorn[standard]

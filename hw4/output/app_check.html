@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Customs: App Check</title>
+    <style>
+      :root {
+        --yale-blue: #00356b;
+        --yale-blue-light: #286dc0;
+        --ink: #222;
+        --muted: #5f6b7a;
+        --line: #dde2e8;
+        --cream: #fbf7f1;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font: 16px/1.6 -apple-system, "Helvetica Neue", Arial, sans-serif;
+      }
+      header {
+        background: var(--yale-blue);
+        color: #fff;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+      }
+      header h1 { margin: 0 0 0.4rem; font: 700 2rem Georgia, "Times New Roman", serif; }
+      header p { margin: 0; color: #c8d7ea; }
+      main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+      .summary {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .summary h2 { margin-top: 0; }
+      .summary ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+      section.check {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 14px rgba(0, 53, 107, 0.06);
+      }
+      h2 { font: 700 1.4rem Georgia, "Times New Roman", serif; color: var(--yale-blue); margin: 0 0 1rem; }
+      .label {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--yale-blue-light);
+        margin-bottom: 0.25rem;
+      }
+      figure { margin: 0; }
+      figure + figure { margin-top: 1.5rem; }
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      figcaption { margin-top: 0.75rem; color: var(--ink); }
+      .verified {
+        margin-top: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+        background: #f4f6f9;
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem;
+      }
+      .verified strong { color: #1f7a4d; }
+      footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding-bottom: 2rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Campus Customs: App Check</h1>
+      <p>Screenshots of the running website and the "Ask Dan" shop chatbot</p>
+    </header>
+
+    <main>
+      <div class="summary">
+        <h2>How these were tested</h2>
+        <ul>
+          <li>Run locally: React + Vite frontend on <code>localhost:5173</code>, FastAPI backend on <code>localhost:8000</code>, PydanticAI agent using <code>gpt-5.6-luna</code> through Portkey.</li>
+          <li>Browser window 1280 × 800, shopping as a guest (not logged in).</li>
+          <li>Every price and stock number shown in the screenshots was checked against <code>data/campus_customs.db</code>.</li>
+        </ul>
+      </div>
+
+      <section class="check">
+        <span class="label">Check 1</span>
+        <h2>Chat checks an item's stock and price honestly</h2>
+        <figure>
+          <img
+            src="app_check_images/01-chat-inventory-check.jpg"
+            alt="Product page for the Baseball Left Chest Crewneck with the Ask Dan chat open. The customer asks the price and whether it comes in XL or medium; Dan replies it is $58.00, XL is out of stock, Medium has only 5 left, and S, L, and XXL are in stock."
+          />
+          <figcaption>
+            On the Baseball Left Chest Crewneck page, the shopper asks "How much is this crewneck, and do you have it in
+            XL or medium?" Dan looks up the price and stock with his tools and replies that it is $58.00, XL is out of
+            stock, and Medium has only 5 left, then suggests the other in-stock sizes (S, L, XXL).
+          </figcaption>
+        </figure>
+        <p class="verified">
+          <strong>Matches the database:</strong> price $58.00; stock XS 0, S 15, M 5, L 25, XL 0, XXL 25 (70 total). The
+          page's own size buttons also show XS and XL crossed out.
+        </p>
+      </section>
+
+      <section class="check">
+        <span class="label">Check 2</span>
+        <h2>Dynamic search result cards after a category question</h2>
+        <figure>
+          <img
+            src="app_check_images/02-hoodie-search-results.jpg"
+            alt="All Products page showing a highlighted 'From your chat with Dan: 12 results for hoodies' section with hoodie product cards (photo, name, short description, price, stock), and the chat panel showing the question 'What hoodies do you have?' with Dan's reply and three small product cards."
+          />
+          <figcaption>
+            Asked "What hoodies do you have?" from the Home page, Dan searched the catalogue and the site jumped to the
+            Products page, where a "From your chat with Dan: 12 results for 'hoodies'" section shows the matches as full
+            product cards (image, type, name, short description, price, stock). The chat shows the first three as small cards, each linking
+            to that product's page.
+          </figcaption>
+        </figure>
+        <p class="verified">
+          <strong>Matches the database:</strong> e.g. Basic Hoodie Big Yale $68.00 / 60 in stock, Brooks Brothers Double
+          Knit Full Zip Hoodie Yale $88.00 / 55, Champion Full Zip Hood $88.00 / 40. The cards are rebuilt from the
+          database, not from the model's text.
+        </p>
+      </section>
+
+      <section class="check">
+        <span class="label">Check 3 &middot; Problem 9 feature</span>
+        <h2>Suggested starter questions in the chat</h2>
+        <figure>
+          <img
+            src="app_check_images/03-starter-questions.jpg"
+            alt="School of Management Crest T Shirt product page with a fresh Ask Dan chat showing three clickable suggestion chips: 'Is this in stock in medium?', 'What colors does this come in?', and 'Show me similar items'."
+          />
+          <figcaption>
+            When the chat is opened fresh on a product page, Dan's greeting is followed by clickable starter questions
+            that fit the page: "Is this in stock in medium?", "What colors does this come in?", and "Show me similar
+            items" (other pages show general ones like "What hoodies do you have?").
+          </figcaption>
+        </figure>
+        <figure>
+          <img
+            src="app_check_images/04-starter-question-answered.jpg"
+            alt="The same page after clicking the first suggestion: the chat shows 'Is this in stock in medium?' and Dan's reply that the School of Management Crest T-Shirt is in stock in Medium with 15 available, with a product card showing $32.00 and 45 in stock."
+          />
+          <figcaption>
+            One click on "Is this in stock in medium?" sends the question; Dan knows "this" means the shirt on screen and
+            answers that Medium is in stock with 15 available. The suggestions disappear once the conversation starts.
+          </figcaption>
+        </figure>
+        <p class="verified">
+          <strong>Matches the database:</strong> School of Management Crest T Shirt, $32.00; stock XS 8, S 8, M 15, L 2,
+          XL 0, XXL 12 (45 total).
+        </p>
+      </section>
+    </main>
+
+    <footer>Campus Customs &middot; Homework 4 app check</footer>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+# This repository publishes only Homework 4 (the hw4/ folder).
+# Everything else in this folder stays local.
+/*
+!/.gitignore
+!/hw4/
