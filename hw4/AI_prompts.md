@@ -286,13 +286,46 @@ The original page transition felt abrupt, so I tried a slower version with a sli
 After the screenshots were taken I changed Handsome Dan's corner (Dan moved to the left of the bones, the Y bone moved, and small screens got a peeking Dan), so the app check images were out of date. I retook all four screenshots with the current site and added the small-screen change, with a phone screenshot, to `output/usability.md` as a responsive design improvement.
 
 
-## Problem 12: <Title>
+## Problem 12: Audit trail, safety, finish harness
 
 **Prompt 1:**
-> 
+> Onto Problem 12. Create an append-only output/audit_trail.json for agent-loop activity (time, tool name, short args/result, stop reason)
+>
+> This should not be overwritten or wiped between runs.
+>
+> Add safety rules to the agent and add them to prompts/prompt.md:
+>
+> * do not make up any values or information
+> * no secret information is asked for or saved in messages
+>
+> Finish output/harness.md with info on how the system works:
+>
+> * model fields in models.py and why you chose them
+> * tools + abilities
+> * safety rules
+> * specs (loop limits, result caps, models, how to run front and back end)
 
 **Follow-up prompt (if needed):**
-> 
+> Are there other safety features I am not thinking of?
+
+> I meant safety features for my agent
+
+> check problem 12
+
+> yes, add the line
 
 *Why the first prompt wasn't enough:*
+The first prompt covered the required pieces, so the follow-ups were about going further and checking. I first asked about safety in general, then clarified I meant safety for the agent, which gave ideas like enforcing the out-of-stock rule in code (added later during the Problem 6 check). Checking Problem 12 against the assignment found that the harness's `ProductCard` row was missing the hidden `description` field added for the product cards, so I had that line added.
 
+## Problem 13: Push to GitHub and submit the URL
+
+**Prompt 1:**
+> do problem 13
+
+**Follow-up prompt (if needed):**
+> (Answered setup questions: rename hw-04 to hw4; a new repo just for hw4; I'll create the empty public GitHub repo and paste the URL.)
+
+> fill in AI_prompts.md for problems 12 and 13
+
+*Why the first prompt wasn't enough:*
+"do problem 13" relied on the assignment screenshot and didn't say how to set things up: the folder was named `hw-04` instead of `hw4`, nothing was in git yet, and the GitHub command-line tool wasn't installed. I chose to rename the folder, use a new repository that contains only `hw4/`, and create the empty public GitHub repository myself so the push only happens after I confirm. I also had the Problem 12 and 13 sections of this file filled in before submitting.
