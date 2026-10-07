@@ -316,16 +316,3 @@ After the screenshots were taken I changed Handsome Dan's corner (Dan moved to t
 
 *Why the first prompt wasn't enough:*
 The first prompt covered the required pieces, so the follow-ups were about going further and checking. I first asked about safety in general, then clarified I meant safety for the agent, which gave ideas like enforcing the out-of-stock rule in code (added later during the Problem 6 check). Checking Problem 12 against the assignment found that the harness's `ProductCard` row was missing the hidden `description` field added for the product cards, so I had that line added.
-
-## Problem 13: Push to GitHub and submit the URL
-
-**Prompt 1:**
-> do problem 13
-
-**Follow-up prompt (if needed):**
-> (Answered setup questions: rename hw-04 to hw4; a new repo just for hw4; I'll create the empty public GitHub repo and paste the URL.)
-
-> fill in AI_prompts.md for problems 12 and 13
-
-*Why the first prompt wasn't enough:*
-"do problem 13" relied on the assignment screenshot and didn't say how to set things up: the folder was named `hw-04` instead of `hw4`, nothing was in git yet, and the GitHub command-line tool wasn't installed. I chose to rename the folder, use a new repository that contains only `hw4/`, and create the empty public GitHub repository myself so the push only happens after I confirm. I also had the Problem 12 and 13 sections of this file filled in before submitting.

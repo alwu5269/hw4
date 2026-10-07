@@ -1,5 +1,24 @@
-# This repository publishes only Homework 4 (the hw4/ folder).
-# Everything else in this folder stays local.
-/*
-!/.gitignore
-!/hw4/
+# Secrets: never commit real keys (copy .env.example to .env locally)
+.env
+.env.*
+!.env.example
+
+# Local-only data pack (database + product images); see README.md
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node / Vite (frontend/.gitignore also covers these)
+node_modules/
+dist/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
